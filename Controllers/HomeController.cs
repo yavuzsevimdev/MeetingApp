@@ -13,14 +13,15 @@ namespace MeetingApp.Controllers
             int saat = DateTime.Now.Hour;
 
             ViewData["Selamlama"] = saat > 12 ? "İyi Günler":"Günaydın";
-            ViewData["UserName"] = "Yavuz";
+            int UserCount = Repository.Users.Where(info => info.WillAttend == true).Count();
+            //ViewData["UserName"] = "Yavuz";
 
             var meetingInfo = new MeetingInfo()
             {
                 Id = 1,
                 Location = "İstanbul, ABC Kongre Merkezi",
                 Date = new DateTime(2004, 01, 20, 20, 0, 0),
-                NumberOfPeople = 100
+                NumberOfPeople = UserCount
             };
             return View(meetingInfo);
         }
